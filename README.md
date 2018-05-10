@@ -1,6 +1,9 @@
 # knowledge
 Base de conhecimento
 
+***************************************************
+Microservices
+
 1. Lucas Cavalcanti @lucascs Arquitetura Funcional em Microservices 4 anos depois
 2. 4 anos atrás: Era tudo mato Contexto inicial -5 engenheiros -Greenfield: Datomic, Clojure, Kafka -Ninguém sabia programar em Clojure antes de entrar -Nenhum guideline consolidado de arquitetura em Clojure ou Funcional
 3. Escolhas -Ir o mais rápido possível, colocar no ar, testar, e se der certo refatorar pra ficar direito, pivotar se não OU -Investir na infraestrutura de entrega contínua e já começar com tudo automatizado, usando as melhores práticas
@@ -43,3 +46,63 @@ Base de conhecimento
 40. Lições aprendidas Microserviços -squads cuidando de grupos de serviços -documentação e onboarding cada vez mais importantes -quebrar um serviço que ficou grande é bastante traumático, mas necessário -domínio mais complicado, serviços menores -carga de automatização foi bem maior do que o esperado -monitoração e tolerância a falhas
 41. Resumo Imutabilidade em todos os níveis Lógicas de negócio em Funções Puras Schemas validados na comunicação Componentes compartilhados Arquitetura hexagonal padronizada Microserviços controlando o escopo SÃO PAULO, BRASIL
 42. sou.nu/vagasnu Lucas Cavalcanti @lucascs Obrigado!
+
+NU Conta
+*******************************************************
+
+1. Gustavo Bicalho Maurício Verardo Construindo a NuConta
+2. Agenda ● NuConta ● Microsserviços no Nubank ● Transferindo dinheiro entre NuContas ○ Event-sourcing: Modularidade e Escalabilidade ○ Consistência em sistemas distribuídos ● O feed de movimentações ○ Backend for Frontends com GraphQL
+3. NuConta
+4. NuConta
+5. NuConta
+6. NuConta
+7. NuConta
+8. NuConta
+9. NuConta
+10. NuConta https://nubank.design/
+11. Microsserviços
+12. Microsserviços Fatura Saldo Antecipação Antecipações Saldos Faturas
+13. Saldos Antecipações Faturas Microsserviços Fatura Saldo Antecipação Load Balancer Load Balancer Load Balancer
+14. Microsserviços Serviço A Serviço B HTTP
+15. Microsserviços Serviço A Tópico do Kafka Serviço B
+16. Transferindo dinheiro entre NuContas SOUTHEAST BRAZIL REGION FROM SPACE
+17. Transferindo dinheiro entre NuContas Pedido de envio Envio Recebimentos Recebimento Envios Liquidação Saldos Depósito
+18. Transferindo dinheiro entre NuContas Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado
+19. Transferindo dinheiro entre NuContas Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Liquidação efetuada
+20. Transferindo dinheiro entre NuContas Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta
+21. Transferindo dinheiro entre NuContas Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido
+22. Transferindo dinheiro entre NuContas Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito
+23. Características interessantes desse fluxo Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito
+24. Event Sourcing
+25. Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito E se o cliente quiser enviar transferências para outra instituição financeira?
+26. Pedido de envio Envios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Depósito E se o cliente quiser enviar transferências para outra instituição financeira? Dinheiro enviado para outra instituição Integração com o banco central
+27. Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito E se o cliente receber transferências de outra instituição financeira?
+28. Recebimentos Saldos Liquidação Recebimento Dinheiro Recebido Depósito E se o cliente receber transferências de outra instituição financeira? Dinheiro recebido do Banco Central Integração com o Banco Central
+29. Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito E se o cliente quiser pagar a fatura do cartão de crédito?
+30. Pedido de Pagamento Pagamento de Fatura Saldos Pedido Pagamento Solicitado Liquidação Pagamento Liquidação efetuada Pagamento de fatura Depósito E se o cliente quiser pagar a fatura do cartão de crédito? Cartão de crédito
+31. Saldos Liquidação Depósito Event Sourcing Saldo hoje Saldo no ano que vem Saldo no mês passado
+32. Pedido de envio RecebimentosEnvios Saldos Pedido Envio Solicitado Liquidação Envio Liquidação efetuada Dinheiro enviado para NuConta Recebimento Dinheiro Recebido Depósito Event Sourcing
+33. Consistência em sistemas distribuídos
+34. O que pode dar errado? Pedido de envio Envios Liquidação Saldos Envio Solicitado Envio Liquidação para envio Recebimentos Recebimento Dinheiro enviado para NuConta Dinheiro Recebido Depósito Pedido
+35. O que pode dar errado? Pedido de envio Envios Saldos Envio Solicitado Envio Liquidação para envio Recebimentos Recebimento Dinheiro enviado para NuConta Dinheiro Recebido Depósito Liquidação Pedido
+36. Primeiro requisito: Processamento at-least-once Todo evento publicado é recebido e processado completamente pelos consumidores pelo menos uma vez
+37. Primeiro requisito: Processamento at-least-once MSG OK! :) MSG MSG MSG
+38. Primeiro requisito: Processamento at-least-once ● Mensagens são persistidas e replicadas no Kafka cluster, podendo ser consumidas a qualquer momento ● Próxima mensagem da fila será entregue de novo até que consumidor confirme que completou seu processamento ● Consumidor só deve confirmar o processamento depois que completar todos os efeitos colaterais
+39. Segundo requisito: Idempotência ● Uma operação é idempotente se aplicá-la várias vezes é equivalente a aplicá-la uma vez ● Exemplos: ○ Multiplicação por 0: 7*0 = 7*0*0 = 7*0*0*0 … = 0 ○ DELETE FROM users WHERE users.id = 186
+40. Segundo requisito: Idempotência ● Cada evento em nossa arquitetura tem um UUID aleatório ● Cada evento derivado usa o UUID do evento anterior (origem) como chave única (chave de idempotência) ● Serviços garantem consistência interna: banco de dados local valida a chave única ● Resultado: Criar um evento a partir de outro é uma operação idempotente Liquidacao ID: 78 Origem: PedidoDeEnvio:32 PedidoDeEnvio ID: 32
+41. Segundo requisito: Idempotência Liquidacao ID: 78 Origem: PedidoDeEnvio:32 PedidoDeEnvio ID: 32 Envio ID: 44 Origem: Liquidacao:78 Recebimento ID: 156 Origem: Envio:44 Deposito ID: 377 Origem: Recebimento:156
+42. E quando um serviço cair? Envios Saldos Pedido de envio Envio Solicitado Liquidação Pedido
+43. E quando um serviço cair? Envios Saldos Pedido de envio Liquidação Envio Solicitado Pedido
+44. E se rolar um bug ou mensagem inválida? Envio Saldos Deadletters xkcd.com (CC BY-NC 2.5) Deadletters: Tópico onde guardamos mensagens cujo processamento falhou (inclui metadados como stack-traces, timestamp, etc) Pedido de envio Liquidação Envio Solicitado Pedido
+45. E se rolar um bug ou mensagem inválida? Envio Saldos Deadletters xkcd.com (CC BY-NC 2.5) Republicar /dev/null Descartar Deadletters: Tópico onde guardamos mensagens cujo processamento falhou (inclui metadados como stack-traces, timestamp, etc) Pedido de envio Liquidação Envio Solicitado Pedido
+46. Feed de movimentações
+47. Dados distribuídos = muitos requests Envios Pedido de envio Envio Recebimentos Recebimento Saldos Depósito Liquidação
+48. Evento de envio no feed ● Valor ● Data ● Status: pendente | falha | sucesso Modelo do backend != visão do cliente Liquidação Envio 404 | 404 404 Envios Pedido de envio Envio Saldos Liquidação
+49. ● Lançar uma nova versão de um aplicativo numa app store pode demorar dias ● Muitos usuários continuam com versões antigas por muito tempo ● Bugfixes e otimizações demoram para chegar ● Frontend acoplado impede evoluções no backend Ciclos de atualização lentos
+50. Backend For Frontend BFF Envios Pedido de envio Envio Recebimentos Recebimento Saldos Depósito Liquidação
+51. "GraphQL is a query language designed to build client applications by providing an intuitive and flexible syntax and system for describing their data requirements and interactions." (GraphQL spec: http://facebook.github.io/graphql/)
+52. Schema é o modelo disponível para o frontend schema { query: Query } type Query { saldo(accountId: ID!): Float feed(accountId: ID!): [Envio | Recebimento] } type Recebimento { data: Date valor: Float } enum StatusEnvio { PENDENTE, FALHA, SUCESSO } type Envio { data: Date valor: Float status: StatusEnvio } Envios Pedido de envio Envio Recebimentos Recebimento Saldos Depósito Liquidação
+53. Query define os campos que o client precisa schema { query: Query } type Query { saldo(accountId: ID!): Float feed(accountId: ID!): [Envio | Recebimento] } type Recebimento { data: Date valor: Float } enum StatusEnvio { PENDENTE, FALHA, SUCESSO } type Envio { data: Date valor: Float status: StatusEnvio } query feedScreen($accountId: ID!) { feed(accountId: $accountId) { ... on Envio { data valor status } ... on Recebimento { data valor } } } POST /api/query
+54. Query define os campos que o client precisa schema { query: Query } type Query { saldo(accountId: ID!): Float feed(accountId: ID!): [Envio | Recebimento] saldoDetalhado(accountId: ID!): SaldoDetalhado } query($accountId: ID!) { feed(accountId: $accountId) { … } saldoDetalhado(accountId: $accountId) { … } } Client v2 query($accountId: ID!) { feed(accountId: $accountId) { … } saldo(accountId: $accountId) } Client v1
+55. Recapitulando ● Event-sourcing ● Comunicação assíncrona via Kafka ● Backend for Frontend com GraphQL
+56. Gustavo Bicalho Maurício Verardo Obrigado! https://sou.nu/vagasnu
